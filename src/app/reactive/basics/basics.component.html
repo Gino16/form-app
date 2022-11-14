@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col">
-    <form autocomplete="off" [formGroup]="myForm">
+    <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="save()">
       <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Producto</label>
         <div class="col-sm-9">
@@ -13,9 +13,8 @@
             formControlName="name"
             placeholder="Nombre del producto"
           />
-          <span class="form-text text-danger">
-            Debe de tener longitud de mas de 3 caracteres</span
-          >
+          <span class="form-text text-danger" *ngIf="validField('name')">
+            Debe de tener longitud de mas de 3 caracteres</span>
         </div>
       </div>
 
@@ -28,6 +27,8 @@
             formControlName="price"
             placeholder="Precio del producto"
           />
+          <span class="form-text text-danger" *ngIf="validField('price')">
+            Debe ser mayor a 0</span>
         </div>
       </div>
 
@@ -40,6 +41,8 @@
             formControlName="quantity"
             placeholder="Existencias del producto"
           />
+          <span class="form-text text-danger" *ngIf="validField('quantity')">
+            Debe ser mayor a 0</span>
         </div>
       </div>
 
@@ -56,12 +59,12 @@
 <div class="row">
   <div class="col">
     <span>Value</span>
-    <pre>{{myForm.value | json}}</pre>
+    <pre>{{ myForm.value | json }}</pre>
     <span>Pristine</span>
-    <pre>{{myForm.pristine | json}}</pre>
+    <pre>{{ myForm.pristine | json }}</pre>
     <span>Toucher</span>
-    <pre>{{myForm.touched| json}}</pre>
+    <pre>{{ myForm.touched | json }}</pre>
     <span>Valid</span>
-    <pre>{{myForm.valid| json}}</pre>
+    <pre>{{ myForm.valid | json }}</pre>
   </div>
 </div>

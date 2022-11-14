@@ -8,20 +8,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   ]
 })
 export class BasicsComponent implements OnInit {
-
-  // myForm: FormGroup = new FormGroup({
-  //   'name': new FormControl('RTX 4080ti')
-  // });
-
   myForm: FormGroup = this.formBuilder.group({
-    name: ['RTX 4080ti', [Validators.required, Validators.minLength(3)]],
-    price: [0, [Validators.required, Validators.min(0)]],
-    quantity: [0, [Validators.required, Validators.min(0)]]
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    price: [0, [Validators.required, Validators.min(1)]],
+    quantity: [0, [Validators.required, Validators.min(1)]]
   });
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.myForm.reset({
+      name: 'RTX',
+      price: 500,
+      quantity: 20
+    })
+  }
+
+  validField(name: string) {
+    return this.myForm.controls[name].errors &&
+      this.myForm.controls[name].touched
+  }
+
+  save() {
+    if (this.myForm.invalid) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+    console.log(this.myForm.value);
+    this.myForm.reset();
   }
 
 }
