@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./template/template.module').then(m => m.TemplateModule)
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
     path: '**',
     redirectTo: 'reactive'
   }
@@ -20,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
